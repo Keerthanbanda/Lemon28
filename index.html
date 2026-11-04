@@ -454,7 +454,6 @@ p{margin:0 0 1em;text-wrap:pretty}
 .sip{position:fixed;right:16px;top:50%;width:112px;z-index:40;text-align:center;transform:translate(140%,-50%);opacity:0;transition:transform .6s var(--ease-spring),opacity .35s;pointer-events:none}
 .sip.show{transform:translate(0,-50%);opacity:1}
 /* on phones the order form needs the whole screen, so the cup steps aside there */
-@media (max-width:760px){.sip.show.away{transform:translateY(140%);opacity:0}}
 /* a photo of their own cup: the bottom part shows the real lemonade, above the juice line the same
    photo is turned into empty frosted plastic. --top is the juice line, --tilt makes it slosh */
 .sip-cup{--top:96%;--tilt:0%;position:relative;aspect-ratio:320 / 543;filter:drop-shadow(0 10px 12px rgba(80,55,0,.28))}
@@ -1411,8 +1410,6 @@ document.querySelectorAll('img[data-same]').forEach(im => { const src = document
     sipPct.textContent = p > .97 ? 'cheers!' : Math.round(p * 100) + '%';
     sip.classList.toggle('full', p > .97);
     sip.classList.toggle('show', scrollY > vh * .7);
-    const o = document.getElementById('order').getBoundingClientRect();
-    sip.classList.toggle('away', o.top < vh * .8 && o.bottom > vh * .2);
     checkUnder();
   };
   // what's behind the cup and the number? Dark sections animate in after the scroll stops, so this also runs on a timer
