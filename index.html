@@ -617,6 +617,16 @@ p{margin:0 0 1em;text-wrap:pretty}
 .js .sec,.js .foot{clip-path:inset(0 calc((1 - var(--e,1)) * 5%) round calc((1 - var(--e,1)) * 80px) calc((1 - var(--e,1)) * 80px) 0 0)}
 .js .sec .head{translate:0 calc((1 - var(--e,1)) * 70px)}
 .js .foot .giant{translate:0 calc((1 - var(--e,1)) * 45%);scale:calc(.82 + var(--e,1) * .18);transform-origin:50% 100%}
+/* phones/touch screens: these redraw whole sections on every scroll frame, which iPhones can't keep up with
+   (parts of the screen flash blank while scrolling), so touch screens get the plain, smooth version */
+@media (hover:none),(max-width:760px){
+  .js .sec,.js .foot{clip-path:none}
+  .js .sec .head{translate:none}
+  .js .foot .giant{translate:none;scale:1}
+  body::after{display:none}
+  .top.scrolled{background:var(--cream);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .nav{backdrop-filter:none;-webkit-backdrop-filter:none}
+}
 
 /* ============ headlines come up word by word ============ */
 .js h2[data-split]{opacity:1;translate:none}
@@ -1424,7 +1434,9 @@ document.querySelectorAll('img[data-same]').forEach(im => { const src = document
     const r = sipPct.getBoundingClientRect(), below = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
     sip.classList.toggle('pct-dark', !!(below && below.closest('[data-dark]')));
   };
-  addEventListener('scroll', onScroll, {passive:true}); addEventListener('resize', onScroll); onScroll();
+  let sipTick = false;
+  addEventListener('scroll', () => { if (!sipTick){ sipTick = true; requestAnimationFrame(() => { sipTick = false; onScroll(); }); } }, {passive:true});
+  addEventListener('resize', onScroll); onScroll();
   setInterval(checkUnder, 250);
 
   // headlines: wrap each word (the script part stays one piece) so they can rise one after another
@@ -1474,10 +1486,11 @@ document.querySelectorAll('img[data-same]').forEach(im => { const src = document
   const secs = [...document.querySelectorAll('.sec, .foot')];
   const marq = document.querySelector('.marquee');
   let lastScroll = scrollY, sk = 0, ticking = false;
+  const touch = matchMedia('(hover:none),(max-width:760px)');
   const motion = () => {
     ticking = false;
     const vh = innerHeight;
-    secs.forEach(el => {
+    if (!touch.matches) secs.forEach(el => {
       const t = el.getBoundingClientRect().top;
       const e = Math.max(0, Math.min(1, (vh - t) / (vh * .75)));
       el.style.setProperty('--e', e.toFixed(3));
