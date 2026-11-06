@@ -136,7 +136,7 @@ p{margin:0 0 1em;text-wrap:pretty}
 .prod:nth-child(3n) .bob{animation-delay:-3.1s}
 /* no drop-shadow filter on moving cutouts (iPhone Safari draws a box); the ::after is the floor shadow */
 /* drinks stand straight up, tipped back a little so you can see into the top of the cup */
-.prod img{display:block;width:100%;height:100%;object-fit:contain;transform:rotateX(12deg) scale(var(--k,1)) scaleY(1.03);transform-origin:50% 100%;user-select:none;-webkit-user-drag:none}
+.prod img{display:block;width:100%;height:100%;object-fit:contain;transform:scale(var(--k,1));transform-origin:50% 100%;user-select:none;-webkit-user-drag:none}
 .prod::after{content:"";position:absolute;left:18%;right:18%;bottom:-6%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(120,80,0,.42),rgba(120,80,0,0));animation:shadow 5s ease-in-out infinite}
 /* light shining through the coloured drink throws a tinted glow on the "table" under the cup */
 .prod::before{content:"";position:absolute;left:8%;right:2%;bottom:-11%;height:16%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c,#F6B400) 70%,transparent),transparent);opacity:.55;filter:blur(6px);animation:shadow 5s ease-in-out infinite}
@@ -661,7 +661,7 @@ h2 .script{display:inline-block}
   h2 .w > span{translate:none;rotate:none}
 }/* ---- simpler font (owner request): Poppins is wider than the old squeezed font, so the big words are sized down to fit ---- */
 h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1}
-.stage-word .w{font-weight:700;letter-spacing:-.025em;font-size:min(16rem,calc(98vw / (var(--n) * .64)),34vh)}
+.stage-word .w{font-weight:700;letter-spacing:-.025em;font-size:min(16rem,calc(92vw / (var(--n) * .7)),34vh)}
 .hero-title{letter-spacing:-.02em;line-height:1.05}
 .head h2{font-size:clamp(2.1rem,4.6vw,4.2rem);letter-spacing:-.025em;line-height:1}
 .melt{font-weight:700;font-size:clamp(2.1rem,4.4vw,4.2rem);letter-spacing:-.025em;line-height:.98}
