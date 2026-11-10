@@ -638,6 +638,9 @@ p{margin:0 0 1em;text-wrap:pretty}
   body::after{display:none}
   .top.scrolled{background:var(--cream);backdrop-filter:none;-webkit-backdrop-filter:none}
   .nav{backdrop-filter:none;-webkit-backdrop-filter:none}
+  /* iPhone Safari clips the hero word's soft glow to the word's own box, which shows as a faint
+     rectangle behind the word. Phones keep only the crisp drop shadow, and skip the blur-in. */
+  .stage-word .w{filter:none;text-shadow:0 4px 0 rgba(17,17,17,.9);transition:opacity .3s var(--ease-out),transform .55s var(--ease-out)}
 }
 
 /* ============ headlines come up word by word ============ */
