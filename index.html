@@ -578,15 +578,20 @@ p{margin:0 0 1em;text-wrap:pretty}
 .guide a.on span{background:var(--pink);color:#fff}
 .g-lemon{position:absolute;left:-31px;top:calc(var(--p) * 100%);width:74px;height:74px;translate:0 -50%;rotate:var(--rot,0deg);pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.28))}
 .g-lemon img{display:block;width:100%;height:100%}
-/* phones: the same rail as laptops, slimmer and tucked into the page margin (the old juice line across the
-   top sat on the logo, so it is gone). It ends above the sip cup in the bottom corner. */
+/* phones: the same rail as laptops, a bit smaller (the old juice line across the top sat on the logo,
+   so it is gone). It ends above the sip cup in the bottom corner. */
 .g-bar{display:none}
 @media (max-width:900px){
-  .guide{left:4px;top:44%;height:min(38vh,300px)}
-  .guide a{width:8px;height:8px}
-  .g-track{left:3px}
-  .g-lemon{left:-11px;width:30px;height:30px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.28))}
-  .guide a span{left:28px;font-size:.72rem}
+  /* the page's left margin grows into a lane for the rail (like the wide margin on laptops), so the
+     whole lemon is on screen, clear of the edge, and the stops never sit on the text */
+  :root{--gl:max(var(--gutter),44px)}
+  .wrap,.tour-steps{padding-left:var(--gl)}
+  .pk-grid{margin-left:calc(var(--gl) * -1);padding-left:var(--gl)}
+  .guide{left:18px;top:44%;height:min(40vh,320px)}
+  .guide a{width:10px;height:10px}
+  .g-track{left:4px}
+  .g-lemon{left:-14px;width:38px;height:38px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.28))}
+  .guide a span{left:34px;font-size:.74rem}
   /* a tap leaves :hover stuck on touch screens, so only the section you just reached shows its name */
   .guide:hover a span{opacity:0;translate:-10px -50%}
   .guide.peek a.on span{opacity:1;translate:0 -50%}
