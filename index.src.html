@@ -104,10 +104,8 @@ p{margin:0 0 1em;text-wrap:pretty}
 .hero{position:relative;height:100svh;min-height:640px;max-height:1040px;overflow:hidden;background:var(--grad);color:var(--ink)}
 /* sun glow behind the drink */
 .hero::before{content:"";position:absolute;left:50%;top:45%;width:min(105vh,92vw);aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.75),rgba(255,255,255,0));pointer-events:none}
-/* bubbles rising + lemon slices drifting in the background */
+/* lemon slices drifting in the background (the rising bubbles were removed at the owner's request, 2026-11-12) */
 .fizz{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.fizz i{position:absolute;bottom:-30px;width:var(--s);height:var(--s);border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),inset -2px -3px 4px rgba(255,255,255,.35),0 2px 6px rgba(160,110,0,.12);background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 12%,rgba(255,255,255,.18) 26%,rgba(255,255,255,0) 60%),radial-gradient(circle at 70% 78%,rgba(255,255,255,.4),transparent 45%);animation:rise var(--t) cubic-bezier(.5,0,.9,.6) infinite;animation-delay:var(--dl)}
-@keyframes rise{0%{transform:translate(0,0) scale(.7);opacity:0}8%{opacity:1}30%{transform:translate(10px,-33vh) scale(.85)}55%{transform:translate(-6px,-60vh) scale(.95)}80%{transform:translate(8px,-88vh) scale(1)}100%{transform:translate(-4px,-112vh) scale(1.05);opacity:0}}
 .slice{position:absolute;width:var(--w);animation:drift 14s ease-in-out infinite;animation-delay:var(--dl,0s);filter:blur(var(--b,0px)) drop-shadow(0 14px 14px rgba(140,90,0,.28))}
 /* smaller slices are "farther away", so they are a little out of focus like in a photo */
 .slice img{width:100%;animation:spin 30s linear infinite}
@@ -228,7 +226,7 @@ p{margin:0 0 1em;text-wrap:pretty}
 .marquee .track{display:flex;width:max-content;animation:marq 40s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
 .marquee span{font-family:var(--f-display);font-weight:800;font-variation-settings:"wdth" 80;font-size:clamp(1.3rem,2.4vw,2rem);letter-spacing:-.02em;white-space:nowrap;padding:0 .55em;display:flex;align-items:center;gap:1.1em;text-transform:lowercase}
-.marquee i{font-family:var(--f-script);font-style:normal;font-weight:400;color:var(--lemon);text-transform:none}
+.marquee i{font-style:normal;color:var(--lemon)}
 .marquee span::after{content:"";width:.6em;height:.6em;border-radius:50%;background:var(--lemon);box-shadow:inset 0 0 0 .13em #FFF6C9}
 @keyframes marq{to{transform:translateX(-50%)}}
 
@@ -250,7 +248,7 @@ p{margin:0 0 1em;text-wrap:pretty}
 .tour{--tc:#FF5C9A;--td:#6B0030;display:grid;grid-template-columns:1fr 1fr;margin-top:clamp(20px,3vw,40px);position:relative;z-index:1}
 .tour-stage{position:sticky;top:0;height:100svh;background:var(--tc);transition:background .8s var(--ease-out);display:grid;place-items:center;overflow:hidden;border-radius:0 44px 44px 0}
 .tour-stage .big{position:absolute;inset:auto 0;text-align:center;font-family:var(--f-display);font-weight:800;font-variation-settings:"wdth" 75;font-size:min(20vw,34vh);line-height:1;letter-spacing:-.05em;text-transform:lowercase;color:var(--td);opacity:.16;white-space:nowrap;transition:color .8s}
-.tour-stage .tname{position:absolute;right:clamp(18px,3vw,36px);bottom:clamp(14px,2.6vw,28px);font-family:var(--f-script);font-size:clamp(1.4rem,2.2vw,2rem);color:#fff;text-shadow:0 2px 0 var(--td)}
+.tour-stage .tname{position:absolute;right:clamp(18px,3vw,36px);bottom:clamp(14px,2.6vw,28px);font-family:var(--f-display);font-weight:700;font-size:clamp(1rem,1.5vw,1.3rem);letter-spacing:-.01em;color:var(--td);transition:color .8s}
 /* the square is bigger than the drink (room for leaves and umbrella), so it may run past the panel: only empty space is clipped */
 .tour-cup{position:relative;width:min(128%,98svh,1100px);aspect-ratio:1;transition:transform .7s var(--ease-spring),opacity .35s,filter .35s}
 .tour-cup.swap{transform:translateY(-22px) rotate(-7deg) scale(.93);opacity:.45;filter:blur(1.5px)}
@@ -267,11 +265,9 @@ p{margin:0 0 1em;text-wrap:pretty}
 .tstep ul{list-style:none;margin:.8rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
 .tstep li{background:#fff;border-radius:99px;padding:.35em .9em;font-weight:700;font-size:.88rem;box-shadow:0 8px 20px -14px rgba(120,80,0,.6)}
 
-/* fill-up headlines (Melt): outlined words that fill with the flavor color as you scroll */
-.melt{font-family:var(--f-display);font-weight:800;font-variation-settings:"wdth" 75;font-size:clamp(2.8rem,6vw,5.6rem);line-height:.86;letter-spacing:-.045em;text-transform:lowercase;margin:.7rem 0 0;
-  color:transparent;-webkit-text-stroke:2px var(--c);
-  background:linear-gradient(to top,var(--c) 50%,transparent 50%);background-size:100% 200%;background-position:0 calc(var(--p,0) * 100%);
-  -webkit-background-clip:text;background-clip:text}
+/* drink names in the flavor list. The owner asked (2026-11-12) for a simple, clean font for each drink,
+   so these are plain solid Poppins in the flavor color: no outline, no fill-up effect, normal capitals */
+.melt{font-family:var(--f-display);font-weight:700;font-size:clamp(2.8rem,6vw,5.6rem);line-height:1;letter-spacing:-.02em;margin:.7rem 0 0;color:var(--c)}
 .drip-wrap{position:relative;display:inline-block;align-self:flex-start}
 @media (max-width:860px){
   .tour{grid-template-columns:1fr}
@@ -746,7 +742,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1}
     <button class="prod" style="--c:#8E5BD8" data-pos="1" type="button" aria-label="Show Blueberry Lavender lemonade"><span class="bob"><img src="assets/board/blueberry-lavender.webp" data-k="blueberry-lavender" alt="Blueberry Lavender lemonade with blueberries and lemon"></span></button>
     <button class="prod" style="--c:#E8233A" data-pos="2" type="button" aria-label="Show Strawberry Wave lemonade"><span class="bob"><img src="assets/board/strawberry-wave.webp" data-k="strawberry-wave" alt="Strawberry Wave lemonade packed with sliced strawberries"></span></button>
     <button class="prod" style="--c:#F2405A" data-pos="2" type="button" aria-label="Show Watermelon Mint lemonade"><span class="bob"><img src="assets/board/watermelon-mint.webp" data-k="watermelon-mint" alt="Watermelon Mint lemonade with watermelon and fresh mint"></span></button>
-    <button class="prod" style="--c:#E8157A" data-pos="2" type="button" aria-label="Show Dragonfruit lemonade"><span class="bob"><img src="assets/board/dragonfruit.webp" data-k="dragonfruit" alt="Hot-pink Dragonfruit lemonade"></span></button>
+    <button class="prod" style="--c:#E8157A" data-pos="2" type="button" aria-label="Show Dragonfruit lemonade"><span class="bob"><img src="assets/board/dragonfruit.webp" data-k="dragonfruit" alt="Dragonfruit lemonade"></span></button>
     <button class="prod" style="--c:#F28C00" data-pos="-2" type="button" aria-label="Show Mango lemonade"><span class="bob"><img src="assets/board/mango.webp" data-k="mango" alt="Mango lemonade with mango chunks"></span></button>
     <button class="prod" style="--c:#F2C83A" data-pos="-2" type="button" aria-label="Show Piña Colada lemonade"><span class="bob"><img src="assets/board/pina-colada.webp" data-k="pina-colada" alt="Piña Colada lemonade with pineapple and lemon"></span></button>
     <button class="prod" style="--c:#FF7A4E" data-pos="-1" type="button" aria-label="Show Peach lemonade"><span class="bob"><img src="assets/board/peach.webp" data-k="peach" alt="Peach lemonade with a peach slice"></span></button>
@@ -818,7 +814,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1}
       <section class="tstep" style="--c:#FF2E7E" data-tc="#FF5C9A" data-td="#6B0030" data-word="dragon" data-name="Dragonfruit" data-cup="#FF2E7E">
         <span class="no">Flavor 01 <b>Crowd fave</b></span>
         <span class="drip-wrap"><h3 class="melt">Dragon&shy;fruit</h3></span>
-        <p>Hot-pink dragonfruit shaken with tart fresh lemon. Some drinks taste as good as they look, and this one does both.</p>
+        <p>Dragonfruit shaken with tart fresh lemon. Some drinks taste as good as they look, and this one does both.</p>
         <ul><li>Real dragonfruit</li><li>Fresh lemon</li><li>No dyes</li></ul>
       </section>
       <section class="tstep" style="--c:#D9A300" data-tc="#FFE04A" data-td="#5C4300" data-word="classic" data-name="Classic 28" data-cup="#FFE36E">
@@ -873,7 +869,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1}
       </article>
       <article class="mi" data-reveal="pop" style="--d:0.00s;--c:#FF2E7E">
         <div class="mi-img"><img data-same="dragonfruit" alt="Dragonfruit lemonade" width="900" height="900"></div>
-        <h4>Dragonfruit</h4><small class="ing">Lemon + dragonfruit</small><p>Hot pink and tart. As good as it looks.</p>
+        <h4>Dragonfruit</h4><small class="ing">Lemon + dragonfruit</small><p>Tart. As good as it looks.</p>
       </article>
       <article class="mi" data-reveal="pop" style="--d:0.07s;--c:#FFB000">
         <div class="mi-img"><img data-same="mango" alt="Mango lemonade" width="900" height="900"></div>
@@ -1168,14 +1164,6 @@ document.querySelectorAll('img[data-same]').forEach(im => { const src = document
     lastY = y;
   }, {passive:true});
 
-  // bubbles rising through the hero
-  const fizz = document.getElementById('fizz');
-  for (let i = 0; i < 22; i++){
-    const b = document.createElement('i');
-    b.style.cssText = `left:${Math.random()*100}%;--s:${8 + Math.random()*22}px;--t:${7 + Math.random()*7}s;--dl:${-Math.random()*14}s`;
-    fizz.appendChild(b);
-  }
-
   // hero carousel: centre drink + big word change together
   const stage = document.getElementById('stage');
   const prods = [...stage.querySelectorAll('.prod')], words = [...stage.querySelectorAll('.w')], dots = document.getElementById('dots');
@@ -1413,8 +1401,7 @@ document.querySelectorAll('img[data-same]').forEach(im => { const src = document
   tSteps.forEach(s => tIO.observe(s));
   tShow(0);
 
-  // ---------- fill-up headlines (Melt) + the sip-o-meter cup (Thick & Co.), both driven by scroll ----------
-  const melts = [...document.querySelectorAll('.melt')];
+  // ---------- the sip-o-meter cup (Thick & Co.), driven by scroll ----------
   const sip = document.getElementById('sip'), sipCup = sip.querySelector('.sip-cup'), sipPct = document.getElementById('sip-pct');
   const SIP_TOP = 17, SIP_BOTTOM = 96;    // juice line in % of the photo's height when full and when empty
   // the juice sloshes when you scroll: a spring that gets a push from scroll speed and settles back level
@@ -1434,12 +1421,6 @@ document.querySelectorAll('img[data-same]').forEach(im => { const src = document
   };
   const onScroll = () => {
     const vh = innerHeight;
-    melts.forEach(el => {
-      // starts filling when the word comes up from the bottom of the screen, full by 35% from the top
-      const r = el.getBoundingClientRect();
-      const p = reduce ? 1 : Math.min(Math.max((vh - r.top) / (vh * .65 + r.height), 0), 1);
-      el.style.setProperty('--p', p); el.parentElement.style.setProperty('--p', p);
-    });
     const max = document.documentElement.scrollHeight - vh;
     const p = max > 0 ? Math.min(scrollY / max, 1) : 0;
     sipCup.style.setProperty('--top', (SIP_BOTTOM - (SIP_BOTTOM - SIP_TOP) * p).toFixed(2) + '%');
