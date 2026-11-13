@@ -638,9 +638,7 @@ p{margin:0 0 1em;text-wrap:pretty}
   body::after{display:none}
   .top.scrolled{background:var(--cream);backdrop-filter:none;-webkit-backdrop-filter:none}
   .nav{backdrop-filter:none;-webkit-backdrop-filter:none}
-  /* iPhone Safari clips a soft shadow to the word's own box when the word also blurs in, which showed as
-     a faint rectangle behind the word. So phones skip the blur-in, and the word's box is padded wider
-     than its shadow (see .stage-word .w at the end of this stylesheet) so nothing is left to clip. */
+  /* phones skip the hero word's blur-in (on iPhone Safari it once left a faint rectangle behind the word) */
   .stage-word .w{filter:none;transition:opacity .3s var(--ease-out),transform .55s var(--ease-out)}
 }
 
@@ -690,11 +688,10 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1}
 .melt{font-weight:400;letter-spacing:-.015em;line-height:1.04;color:color-mix(in srgb,var(--c) 80%,#111)}   /* thin strokes need a slightly deeper color to read on yellow */
 .tour-stage .tname{font-weight:500}
 .mi h4{font-weight:500;letter-spacing:-.015em}
-/* slider word, like the owner's mockup (2026-11-13): thin white letters with a soft shadow, small enough
-   to sit across the cup. The padding is bigger than the shadow's blur on purpose (iPhone clipping, see above). */
-.stage-word .w{font-weight:300;letter-spacing:-.01em;padding:.45em .32em;
-  font-size:min(8rem,calc(46vw / (var(--n) * .5)),22vh);
-  text-shadow:0 2px 12px rgba(70,40,0,.42),0 1px 3px rgba(70,40,0,.32)}
+/* slider word, like the owner's mockup (2026-11-13): thin white letters, small enough to sit across the cup.
+   The owner then asked for it plain, "non 3D, no drop shadow", so it has NO text-shadow at all: don't add one back. */
+.stage-word .w{font-weight:300;letter-spacing:-.01em;text-shadow:none;
+  font-size:min(8rem,calc(46vw / (var(--n) * .5)),22vh)}
 @media (max-width:760px){.stage-word .w{font-size:min(18vw,calc(70vw / (var(--n) * .5)))}}
 /* the line under the drink, in the same clean letters */
 .hero-title{font-family:var(--f-display);font-weight:400;letter-spacing:-.02em}
